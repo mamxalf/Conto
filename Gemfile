@@ -67,3 +67,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# for validation.rb data
+gem 'dry-validation.rb', '~> 1.10'

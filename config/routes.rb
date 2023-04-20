@@ -1,6 +1,7 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
+  resources :mocks
   # Defines the root path route ("/")
-  # root "articles#index"
+  Engine::Router.new.load_routes! if ActiveRecord::Migrator.current_version > 0
 end

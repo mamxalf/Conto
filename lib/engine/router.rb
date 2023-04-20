@@ -24,7 +24,8 @@ module Engine
 
     def define_route(mock)
       Conto::Application.routes.draw do
-        self.send(:match, mock[:path], to: mock[:destination], defaults: { test: mock[:id] }, via: mock[:request_method])
+        send(:match, mock[:path], to: mock[:destination], defaults: { test: mock[:id] },
+                                  via: mock[:request_method])
       end
     end
   end

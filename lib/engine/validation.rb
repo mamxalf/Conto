@@ -6,8 +6,6 @@ module Engine
       required(:email).value(:string)
       required(:age).value(:integer)
     end
-    def call
-
-    end
+    def call; end
   end
 end

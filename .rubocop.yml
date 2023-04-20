@@ -1,0 +1,20 @@
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+Rails/ReversibleMigration:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+Rails/I18nLocaleTexts:
+  Enabled: false

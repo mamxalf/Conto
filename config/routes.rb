@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'engine/router'
 
 Rails.application.routes.draw do

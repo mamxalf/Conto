@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TestController < ApplicationController
+class Api::TestController < ActionController::API
   def test
     render json: params
   end

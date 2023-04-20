@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-require 'engine/router'
-
 Rails.application.routes.draw do
-  namespace :api do
-    post 'reloader/trigger'
-  end
+  resources :mocks
   # Defines the root path route ("/")
-  Engine::Router.load_routes!
+  Engine::Router.new.load_routes! if ActiveRecord::Migrator.current_version > 0
 end

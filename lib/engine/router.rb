@@ -1,32 +1,22 @@
 # frozen_string_literal: true
 
-module Engine
-  class Router
-    def self.load_routes!
-      test = [
-        {
-          path: 'test/1',
-          destination: 'test#test',
-          request_method: 'get',
-          id: '1'
-        },
-        {
-          path: 'test/post',
-          destination: 'api/test#test',
-          request_method: 'post',
-          id: '2'
-        }
-      ]
-      test.each do |t|
-        Router.new.define_route t
-      end
+class Engine::Router
+  def self.reset
+    Rails.application.routes.clear!
+    Rails.application.reload_routes!
+  end
+  def load_routes!
+    mocks = Mock.all
+    mocks.each do |mock|
+      define_route mock
     end
+  end
 
-    def define_route(mock)
-      Conto::Application.routes.draw do
-        send(:match, mock[:path], to: mock[:destination], defaults: { test: mock[:id] },
-                                  via: mock[:request_method])
-      end
+  private
+
+  def define_route(mock)
+    Conto::Application.routes.draw do
+      self.send(:match, mock[:path], to: 'mocks#serve_mock', via: mock[:request_method])
     end
   end
 end

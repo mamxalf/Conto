@@ -5,7 +5,7 @@ module Engine
     def self.load_routes!
       test = [
         {
-          path: 'test/get',
+          path: 'test/1',
           destination: 'test#test',
           request_method: 'get',
           id: '1'
@@ -27,10 +27,6 @@ module Engine
         send(:match, mock[:path], to: mock[:destination], defaults: { test: mock[:id] },
                                   via: mock[:request_method])
       end
-    end
-
-    def self.reload_routes!
-      Conto::Application.routes_reloader.reload!
     end
   end
 end

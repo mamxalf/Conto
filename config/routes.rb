@@ -2,6 +2,11 @@
 
 Rails.application.routes.draw do
   resources :mocks
-  # Defines the root path route ("/")
-  Engine::Router.new.load_routes! if ActiveRecord::Migrator.current_version > 0
+
+  # set wildcard
+  get '*url', to: 'mocks#serve_mock'
+  post '*url', to: 'mocks#serve_mock'
+  put '*url', to: 'mocks#serve_mock'
+  patch '*url', to: 'mocks#serve_mock'
+  delete '*url', to: 'mocks#serve_mock'
 end

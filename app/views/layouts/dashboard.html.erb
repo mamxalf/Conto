@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Umbra</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_importmap_tags %>
+  <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+      } else {
+          document.documentElement.classList.remove('dark')
+      }
+  </script>
+</head>
+
+<body>
+<div class="flex">
+  <%= render 'layouts/shared/sidebard' %>
+  <section class="container px-4 mx-auto dark:bg-gray-800">
+    <div class="mx-8 my-8">
+      <%= yield %>
+    </div>
+  </section>
+</div>
+</body>
+</html>

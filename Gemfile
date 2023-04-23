@@ -74,6 +74,11 @@ group :development, :test do
   # rubocop for linter
   gem 'rubocop', require: false
   gem 'rubocop-rails', '~> 2.18'
+
+  # faker factory
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 3.1', '>= 3.1.1'
 end
 
 group :development do
@@ -92,6 +97,10 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+
+  # rspec
+  gem 'rspec', '~> 3.12'
+  gem 'rspec-rails', '~> 6.0', '>= 6.0.1'
 end
 
 # for validation.rb data

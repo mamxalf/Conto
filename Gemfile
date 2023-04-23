@@ -64,6 +64,9 @@ gem 'dry-matcher', '~> 1.0'
 gem 'dry-monads', '~> 1.6'
 gem 'dry-struct', '~> 1.6'
 
+# help to kill N+1 queries and unused eager loading.
+gem 'bullet', '~> 7.0', '>= 7.0.7'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

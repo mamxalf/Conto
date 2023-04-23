@@ -7,7 +7,8 @@ class Users::UseCases::GetListUser < Abstracts::UseCase
   end
 
   def call
-    pagy(User.where(organization_id: @organization_id))
+    # TODO: size limit
+    pagy(User.includes([:organization]).where(organization_id: @organization_id), items: (params[:size] || nil))
   end
 
   private

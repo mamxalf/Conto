@@ -1,7 +1,25 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'user/index'
+  get 'dashboard/index'
+  # root: temporary
+  root to: redirect('users/sign_in')
+
+  # Devise
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
+  # base router
+  resources :routers
+  resources :organizations
   resources :mocks
-  # Defines the root path route ("/")
-  Engine::Router.new.load_routes! if ActiveRecord::Migrator.current_version > 0
+
+  # set wildcard router
+  get '*organization/*url', to: 'mocks#serve_mock'
+  post '*organization/*url', to: 'mocks#serve_mock'
+  put '*organization/*url', to: 'mocks#serve_mock'
+  patch '*organization/*url', to: 'mocks#serve_mock'
+  delete '*organization/*url', to: 'mocks#serve_mock'
 end

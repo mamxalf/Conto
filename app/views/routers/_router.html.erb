@@ -1,0 +1,22 @@
+<div id="<%= dom_id router %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Organization:</strong>
+    <%= router.organization_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Path:</strong>
+    <%= router.path %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Request method:</strong>
+    <%= router.request_method %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this router", router, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this router', edit_router_path(router), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

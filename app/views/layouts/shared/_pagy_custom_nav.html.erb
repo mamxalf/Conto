@@ -1,0 +1,29 @@
+<!--i don't know about this, for sure-->
+<% link = pagy_link_proc(pagy, link_extra: 'class="page-link"') -%>
+<!--end i don;t know-->
+
+<% if pagy.prev -%>
+  <div class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"><%== link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous"') %></div>
+<% else -%>
+  <div class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+    <a href="#" class="page-link"><%== pagy_t('pagy.nav.prev') %></a></div>
+<% end -%>
+
+<div class="items-center hidden md:flex gap-x-3">
+  <% pagy.series.each do |item| -%>
+    <% if item.is_a?(Integer) -%>
+      <div class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"><%== link.call(item) %></div>
+    <% elsif item.is_a?(String) -%>
+      <div class="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60"><%== link.call(item) %></div>
+    <% elsif item == :gap -%>
+      <div href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"><%== pagy_t('pagy.nav.gap') %></div>
+    <% end -%>
+  <% end -%>
+</div>
+
+<% if pagy.next -%>
+  <div class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"><%== link.call(pagy.next, pagy_t('pagy.nav.next'), 'aria-label="next"') %></div>
+<% else -%>
+  <div class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+    <a href="#" class="page-link"><%== pagy_t('pagy.nav.next') %></a></div>
+<% end -%>

@@ -5,6 +5,6 @@ class UserController < ApplicationController
   layout 'dashboard'
 
   def index
-    @pagy, @users = Users::UseCases::GetListUser.new(params).call
+    @pagy, @users = Users::UseCases::GetListUser.new(params:, organization_id: current_user.organization_id).call
   end
 end

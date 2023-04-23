@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # user
   get 'user/index'
+  delete 'user/destroy/:id', to: 'user#destroy', as: 'user_destroy'
+
   get 'dashboard/index'
   # root: temporary
   root to: redirect('users/sign_in')

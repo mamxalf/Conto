@@ -8,7 +8,7 @@ class Routers::UseCases::GetMockRouter < Abstracts::UseCase
   end
 
   def call
-    router = Router.find_by(organization_id: @organization_id, path: @params[:path], request_method: @request_method.downcase)
+    router = Router.find_by(organization_id: @organization_id, path: @params[:path], request_method: @request_method)
     if router.nil?
       Failure 'Path not Found.'
     else

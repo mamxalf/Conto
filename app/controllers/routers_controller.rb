@@ -11,7 +11,8 @@ class RoutersController < ApplicationController
   end
 
   # GET /routers/1 or /routers/1.json
-  def show; end
+  def show
+  end
 
   # GET /routers/new
   def new
@@ -19,7 +20,8 @@ class RoutersController < ApplicationController
   end
 
   # GET /routers/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /routers or /routers.json
   def create

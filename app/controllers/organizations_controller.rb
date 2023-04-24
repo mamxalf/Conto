@@ -9,7 +9,8 @@ class OrganizationsController < ApplicationController
   end
 
   # GET /organizations/1 or /organizations/1.json
-  def show; end
+  def show
+  end
 
   # GET /organizations/new
   def new
@@ -17,7 +18,8 @@ class OrganizationsController < ApplicationController
   end
 
   # GET /organizations/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /organizations or /organizations.json
   def create

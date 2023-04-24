@@ -7,8 +7,8 @@ class Abstracts::UseCase
   def paginate!(pagy, _response, count: nil)
     pages = {
       offset: pagy.page,
-      total: (count.presence || pagy.count),
-      limit: pagy.items
+      total:  (count.presence || pagy.count),
+      limit:  pagy.items
     }
 
     Abstracts::Pagination.new(pages)

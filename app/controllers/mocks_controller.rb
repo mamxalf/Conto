@@ -10,7 +10,8 @@ class MocksController < ApplicationController
   end
 
   # GET /mocks/1 or /mocks/1.json
-  def show; end
+  def show
+  end
 
   # GET /mocks/new
   def new
@@ -18,7 +19,8 @@ class MocksController < ApplicationController
   end
 
   # GET /mocks/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /mocks or /mocks.json
   def create
@@ -61,10 +63,14 @@ class MocksController < ApplicationController
   # serve mock
 
   def serve_mock
-    self_organization_id = current_user.organization_id
-    return render json: 'error' if self_organization_id != params[:organization]
+    schema = Dry::Schema.Params do
+      required(:organization).filled(:string, eql?: current_user_organization_id)
+    end
 
-    router = Routers::UseCases::GetMockRouter.new(organization_id: self_organization_id, params:, request_method: request.method).call
+    validation = schema.call(hash_params)
+    return render json: validation.errors.to_hash if validation.failure?
+
+    router = Routers::UseCases::GetMockRouter.new(organization_id: current_user_organization_id, params: hash_params, request_method: request.method).call
     render json: router
   end
 
@@ -78,5 +84,13 @@ class MocksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def mock_params
     params.require(:mock).permit(:path, :destination, :request_method)
+  end
+
+  def hash_params
+    Hashie::Mash.new(params)
+  end
+
+  def current_user_organization_id
+    current_user.organization_id
   end
 end

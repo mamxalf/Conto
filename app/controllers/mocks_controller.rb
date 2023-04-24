@@ -62,9 +62,18 @@ class MocksController < ApplicationController
 
   def serve_mock
     self_organization_id = current_user.organization_id
-    return render json: 'error' if self_organization_id != params[:organization]
 
-    router = Routers::UseCases::GetMockRouter.new(organization_id: self_organization_id, params:, request_method: request.method).call
+    schema = Dry::Schema.Params do
+      required(:organization).filled(:string, eql?: self_organization_id)
+    end
+
+    validation = schema.call(hash_params)
+    if validation.failure?
+      errors = validation.errors.to_hash
+      return render json: errors
+    end
+
+    router = Routers::UseCases::GetMockRouter.new(organization_id: self_organization_id, params: hash_params, request_method: request.method).call
     render json: router
   end
 
@@ -78,5 +87,9 @@ class MocksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def mock_params
     params.require(:mock).permit(:path, :destination, :request_method)
+  end
+
+  def hash_params
+    Hashie::Mash.new(params)
   end
 end

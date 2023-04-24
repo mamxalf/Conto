@@ -63,6 +63,7 @@ gem 'hashie', '~> 5.0'
 gem 'dry-matcher', '~> 1.0'
 gem 'dry-monads', '~> 1.6'
 gem 'dry-struct', '~> 1.6'
+gem 'dry-validation', '~> 1.10'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

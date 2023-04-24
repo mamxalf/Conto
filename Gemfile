@@ -71,6 +71,7 @@ group :development, :test do
 
   # rubocop for linter
   gem 'rubocop', require: false
+  gem 'rubocop-performance', '~> 1.17', '>= 1.17.1'
   gem 'rubocop-rails', '~> 2.18'
 
   # faker factory

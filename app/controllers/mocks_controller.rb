@@ -10,7 +10,8 @@ class MocksController < ApplicationController
   end
 
   # GET /mocks/1 or /mocks/1.json
-  def show; end
+  def show
+  end
 
   # GET /mocks/new
   def new
@@ -18,7 +19,8 @@ class MocksController < ApplicationController
   end
 
   # GET /mocks/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /mocks or /mocks.json
   def create
@@ -61,19 +63,14 @@ class MocksController < ApplicationController
   # serve mock
 
   def serve_mock
-    self_organization_id = current_user.organization_id
-
     schema = Dry::Schema.Params do
-      required(:organization).filled(:string, eql?: self_organization_id)
+      required(:organization).filled(:string, eql?: current_user_organization_id)
     end
 
     validation = schema.call(hash_params)
-    if validation.failure?
-      errors = validation.errors.to_hash
-      return render json: errors
-    end
+    return render json: validation.errors.to_hash if validation.failure?
 
-    router = Routers::UseCases::GetMockRouter.new(organization_id: self_organization_id, params: hash_params, request_method: request.method).call
+    router = Routers::UseCases::GetMockRouter.new(organization_id: current_user_organization_id, params: hash_params, request_method: request.method).call
     render json: router
   end
 
@@ -91,5 +88,9 @@ class MocksController < ApplicationController
 
   def hash_params
     Hashie::Mash.new(params)
+  end
+
+  def current_user_organization_id
+    current_user.organization_id
   end
 end

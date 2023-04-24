@@ -3,5 +3,6 @@
 class DashboardController < ApplicationController
   layout 'dashboard'
 
-  def index; end
+  def index
+  end
 end

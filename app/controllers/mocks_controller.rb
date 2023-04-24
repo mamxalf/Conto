@@ -61,7 +61,11 @@ class MocksController < ApplicationController
   # serve mock
 
   def serve_mock
-    render json: params
+    self_organization_id = current_user.organization_id
+    return render json: 'error' if self_organization_id != params[:organization]
+
+    router = Routers::UseCases::GetMockRouter.new(organization_id: self_organization_id, params:, request_method: request.method).call
+    render json: router
   end
 
   private

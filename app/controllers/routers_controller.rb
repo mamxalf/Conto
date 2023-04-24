@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RoutersController < ApplicationController
+  before_action :authenticate_user!
+  layout 'dashboard'
   before_action :set_router, only: %i[show edit update destroy]
 
   # GET /routers or /routers.json
@@ -66,6 +68,7 @@ class RoutersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def router_params
+    params.require(:router)['organization_id'] = current_user.organization_id
     params.require(:router).permit(:organization_id, :path, :request_method)
   end
 end

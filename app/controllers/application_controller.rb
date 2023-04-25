@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   def after_sign_in_path_for(_resource)
-    dashboard_index_path
+    dashboards_url
   end
 
   def handle_result(redirect_url, result)

@@ -21,9 +21,10 @@
 
 <body>
 <div class="flex">
-  <%= render 'layouts/shared/sidebard' %>
-  <section class="container px-4 mx-auto dark:bg-gray-800">
-    <div class="mx-8 my-8">
+  <%= render 'layouts/shared/sidebar' %>
+  <section class="container mx-auto dark:bg-gray-800">
+    <%= render 'layouts/shared/breadcrumbs' %>
+    <div class="mx-16 my-8">
       <%= yield %>
     </div>
   </section>

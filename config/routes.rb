@@ -2,10 +2,15 @@
 
 Rails.application.routes.draw do
   # user
-  get 'user/index'
-  delete 'user/destroy/:id', to: 'user#destroy', as: 'user_destroy'
+  # get 'user/index'
+  # delete 'user/destroy/:id', to: 'user#destroy', as: 'user_destroy'
 
-  get 'dashboard/index'
+  # dashboard
+  get 'dashboards', to: 'dashboard#index'
+  get 'settings', to: 'setting#index'
+  post 'settings/token', to: 'setting#generate_token', as: 'generate_token'
+  delete 'settings/token', to: 'setting#clear_token', as: 'clear_token'
+
   # root: temporary
   root to: redirect('users/sign_in')
 

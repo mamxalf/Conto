@@ -2,9 +2,9 @@
 
 require 'test_helper'
 
-class DashboardControllerTest < ActionDispatch::IntegrationTest
+class SettingControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
-    get dashboards_url
+    get setting_index_url
     assert_response :success
   end
 end

@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   # base router
   resources :routers
   resources :organizations
-  resources :mocks
 
   # set wildcard router
   get '*organization/*path', to: 'mocks#serve_mock'

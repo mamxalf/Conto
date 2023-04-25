@@ -20,4 +20,22 @@ class ApplicationController < ActionController::Base
   def alert_message(failure_result)
     block_given? ? yield(failure_result) : failure_result
   end
+
+  def authorize_request
+    organization_id = params[:organization]
+    token = request.headers['Authorization']
+    token = token.split(' ').last if token
+    begin
+      @organization = Organization.find(organization_id)
+      render json: { errors: 'token invalid' }, status: :unauthorized if @organization.token != token
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue => e
+      render json: { errors: e }, status: :unauthorized
+    end
+  end
+
+  def hash_params
+    Hashie::Mash.new(params)
+  end
 end

@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def authorize_request
     organization_id = params[:organization]
     token = request.headers['Authorization']
-    token = token.split(' ').last if token
+    token = token.split.last if token
     begin
       @organization = Organization.find(organization_id)
       render json: { errors: 'token invalid' }, status: :unauthorized if @organization.token != token

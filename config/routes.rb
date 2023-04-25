@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # dashboard
   get 'dashboards', to: 'dashboard#index'
   get 'settings', to: 'setting#index'
-
+  post 'settings/token', to: 'setting#generate_token', as: 'generate_token'
 
   # root: temporary
   root to: redirect('users/sign_in')

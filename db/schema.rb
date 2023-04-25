@@ -10,12 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_093902) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_150557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "body_routers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "router_id", null: false
+    t.string "field"
+    t.string "type"
+    t.text "message"
+    t.boolean "is_optional"
+    t.jsonb "extra"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["router_id"], name: "index_body_routers_on_router_id"
+  end
+
+  create_table "jwt_denylists", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exp"], name: "index_jwt_denylists_on_exp"
+    t.index ["jti"], name: "index_jwt_denylists_on_jti"
+  end
 
   create_table "mocks", force: :cascade do |t|
     t.string "path"
@@ -53,11 +74,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_093902) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "jwt_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "body_routers", "routers"
   add_foreign_key "routers", "organizations"
   add_foreign_key "users", "organizations"
 end

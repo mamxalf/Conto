@@ -10,4 +10,9 @@ class SettingController < ApplicationController
     result = Settings::UseCases::UserGenerateToken.new(organization_id: current_user.organization_id).call
     handle_result(settings_url, result)
   end
+
+  def clear_token
+    result = Settings::UseCases::UserClearToken.new(organization_id: current_user.organization_id).call
+    handle_result(settings_url, result)
+  end
 end
